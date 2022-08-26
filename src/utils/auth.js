@@ -1,5 +1,8 @@
 export const BASE_URL = 'https://auth.nomoreparties.co'
 
+const handleResponse = (res) =>
+  res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+
 export const register = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
@@ -8,9 +11,7 @@ export const register = (password, email) => {
     },
     body: JSON.stringify({password, email})
   })
-  .then(response => response.json())
-  .then(res => res)
-  .catch(err => console.log(err))
+  .then(handleResponse)
 }
 
 export const authorize = (password, email) => {
@@ -21,25 +22,16 @@ export const authorize = (password, email) => {
     },
     body: JSON.stringify({password, email})
   })
-  .then((response => response.json()))
-  .then((data) => {
-    if (data.token){
-      localStorage.setItem('jwt', data.token);
-      return data.token;
-    } 
-  })
-  .catch(err => console.log(err))
+  .then(handleResponse)
 };
 
-export const getCheckToken = (token) => {
+export const getCheckToken = (jwt) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
-      "Authorization" : `Bearer ${token}`
+      "Authorization" : `Bearer ${jwt}`
     }
   })
-  .then((response => response.json()))
-  .then(res => res)
-  .catch(err => console.log(err))
+  .then(handleResponse)
 };

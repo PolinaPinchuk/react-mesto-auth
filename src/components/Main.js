@@ -19,7 +19,7 @@ const currentUser = React.useContext(CurrentUserContext);
             </div>
             <button className="profile__add-button" type="button" onClick={props.onAddPlace}></button>
         </section>
-        <section className="elements">
+                <section className="elements">
         {props.cards && 
           props.cards.map((newCard) => { 
             return ( 
