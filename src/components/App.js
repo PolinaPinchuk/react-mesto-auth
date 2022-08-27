@@ -205,11 +205,7 @@ function App() {
                 onCardDelete={handleCardDelete}>
               </ProtectedRoute>           
 
-              {/* <Route exact path="/">
-                {loggedIn ? <Redirect to="/main" /> : <Redirect to="/sign-in" />}
-              </Route> */}
             </Switch>
-
 
             <InfoTooltip isOpen={tooltipStatus} onClose={closeAllPopups}
               name='infoToolTip'
